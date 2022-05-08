@@ -1,7 +1,6 @@
 from pathlib import Path
-from typing import Union
 
-PathLike = Union[Path, str, bytes]
+PathLike = Path | str | bytes
 
 
 class NyaCommand:
@@ -50,9 +49,14 @@ class Nya:
                 case _:
                     continue
 
+    def execute_source(self, source: str) -> None:
+        self.execute(source)
         print()
 
     def execute_path(self, path: PathLike) -> None:
         """Fetches the code from `path` and executes it."""
         with open(path) as file:
-            self.execute(file.read())
+            for line in file:
+                self.execute(line.strip())
+
+        print()
