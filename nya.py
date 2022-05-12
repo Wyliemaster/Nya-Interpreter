@@ -1,6 +1,6 @@
 from pathlib import Path
 
-PathLike = Path | str | bytes
+PathLike = Path | str
 
 
 class NyaCommand:
